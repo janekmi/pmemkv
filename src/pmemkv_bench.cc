@@ -593,6 +593,7 @@ private:
 
     void ReadRandomWriteRandom(ThreadState *thread) {
         DoRead(thread, false, false);
+        num_ -= reads_;
         DoWrite(thread, false);
     }
 };
