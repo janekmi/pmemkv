@@ -158,7 +158,7 @@ umount /mnt/<your-mapped-directory>
 mount | grep dax   <-- should return nothing now
 ```
 
-Then convert the namespace to DAX: (name comes from ndctl output above)
+Then convert the namespace to device DAX: (name comes from ndctl output above)
 
 ```
 sudo ndctl create-namespace -e namespace2.0 -f -m dax
@@ -175,14 +175,13 @@ ll /dev/da*
 crw------- 1 root root 238, 0 Jun  8 11:38 /dev/dax2.0
 ```
 
-Next clear and initialize the DAX device:
+Next clear the device DAX:
 
 ```
 pmempool rm --verbose /dev/dax2.0
-pmempool create --layout pmemkv obj /dev/dax2.0
 ```
 
-Now pass the device DAX device as a parameter to `pmemkv` like this:
+Now pass the device DAX as a parameter to `pmemkv` like this:
 
 ```
 ./pmemkv_bench --db=/dev/dax2.0
@@ -254,12 +253,6 @@ First create a pool set descriptor:  (`~/pmemkv.poolset` in this example)
 PMEMPOOLSET
 1000M /dev/shm/pmemkv1
 1000M /dev/shm/pmemkv2
-```
-
-Next initialize the pool set:
-
-```
-pmempool create --layout pmemkv obj ~/pmemkv.poolset
 ```
 
 Now pass the pool set as a parameter to `pmemkv` like this:
