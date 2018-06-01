@@ -26,9 +26,7 @@ uninstall:
 
 bench: configure reset
 	cd ./bin && make pmemkv_bench
-	cp .poolset.example /dev/shm/pmemkv.poolset
-	PMEM_IS_PMEM_FORCE=1 ./bin/pmemkv_bench --db=/dev/shm/pmemkv.poolset --histogram=1
-	rm -rf /dev/shm/pmemkv.poolset
+	PMEM_IS_PMEM_FORCE=1 ./bin/pmemkv_bench --db=/dev/shm/pmemkv --histogram=1 --db_size_in_gb=1
 	rm -rf /dev/shm/pmemkv
 
 example: configure reset

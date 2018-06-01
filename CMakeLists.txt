@@ -34,6 +34,7 @@ project(pmemkv)
 set(CMAKE_CXX_STANDARD 11)
 set(SOURCE_FILES src/pmemkv.cc src/pmemkv.h
     src/engines/blackhole.h src/engines/blackhole.cc
+    src/engines/kvtree_old.h src/engines/kvtree_old.cc
     src/engines/kvtree.h src/engines/kvtree.cc
     src/engines/kvtree2.h src/engines/kvtree2.cc
     src/engines/btree.h src/engines/btree.cc
